@@ -28,8 +28,8 @@ export default function App() {
     <div className="relative min-h-screen w-full">
       <Header currentPage={currentPage} setCurrentPage={setCurrentPage} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
 
-      {/* Hero Section - Totalmente fixo */}
-      <section className="relative h-[500px] bg-cover bg-center bg-no-repeat bg-fixed" style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://i.ibb.co/Z1NXpbSX/Rectangle-4.png')` }}>
+      {/* Hero Section - Adicionado padding-top para não ficar atrás do header */}
+      <section className="relative h-[500px] bg-cover bg-center bg-no-repeat pt-16" style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://i.ibb.co/Z1NXpbSX/Rectangle-4.png')` }}>
         <div className="max-w-7xl mx-auto px-4 h-full flex flex-col justify-center items-center text-center">
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">Explorar Angola nunca<br />foi tão fácil</h1>
           <p className="text-xl text-white mb-8">Descubra experiências incríveis em cada canto do país</p>
@@ -49,7 +49,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* Seção de Parceiros - Totalmente fixa */}
+      {/* Seção de Parceiros */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">Nossos Parceiros</h2>
@@ -63,7 +63,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* Negócios e sociedade - Sem hover */}
+      {/* Negócios e sociedade */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-4">Negócios e sociedade</h2>
@@ -87,7 +87,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* Acomodações em Ondjiva - Sem efeitos */}
+      {/* Acomodações em Ondjiva */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-between items-center mb-8">
@@ -129,7 +129,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* Experiências Populares - Sem hover */}
+      {/* Experiências Populares */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">Experiências Populares</h2>
@@ -184,7 +184,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* Statistics - Sem animação */}
+      {/* Statistics */}
       <section className="py-16 bg-[#1E3A5F] text-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8 text-center">
@@ -208,7 +208,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* Depoimentos - Sem transições */}
+      {/* Depoimentos */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">O que dizem Nossos Viajantes</h2>
@@ -239,7 +239,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* Mobile App Section - Totalmente estático */}
+      {/* Mobile App Section */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center gap-12">
@@ -289,7 +289,7 @@ export default function App() {
   );
 }
 
-// Header fixo
+// Header CORRIGIDO com menu hamburguer posicionado corretamente
 function Header({ currentPage, setCurrentPage, menuOpen, setMenuOpen }: { currentPage: string, setCurrentPage: (page: string) => void, menuOpen: boolean, setMenuOpen: (state: boolean) => void }) {
   return (
     <header className="bg-white shadow-md fixed top-0 left-0 w-full z-50">
@@ -299,30 +299,51 @@ function Header({ currentPage, setCurrentPage, menuOpen, setMenuOpen }: { curren
         {/* Desktop Menu */}
         <nav className="hidden md:flex gap-6">
           {["Home", "Viagens", "Lugares", "Eventos", "Blog"].map((item) => (
-            <button key={item} onClick={() => setCurrentPage(item.toLowerCase())} className={clsx("font-medium", currentPage === item.toLowerCase() && "text-orange-500")}>{item}</button>
+            <button key={item} onClick={() => setCurrentPage(item.toLowerCase())} className={clsx("font-medium", currentPage === item.toLowerCase() && "text-orange-500")}>
+              {item}
+            </button>
           ))}
         </nav>
 
-        {/* Hamburger - Sem animações */}
-        <button className="md:hidden flex flex-col gap-1 w-6 h-6 justify-center items-center relative z-50" onClick={() => setMenuOpen(!menuOpen)}>
+        {/* Hamburger Button - Correção */}
+        <button 
+          className="md:hidden flex flex-col gap-1 w-6 h-6 justify-center items-center relative z-50"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle menu"
+        >
           <span className="block h-0.5 w-full bg-black" />
           <span className="block h-0.5 w-full bg-black" />
           <span className="block h-0.5 w-full bg-black" />
         </button>
       </div>
 
-      {/* Mobile Menu */}
-      <div className={clsx("fixed top-0 right-0 h-full w-64 bg-white shadow-xl z-40", menuOpen ? "" : "hidden")}>
-        <nav className="flex flex-col mt-20">
-          {["Home", "Viagens", "Lugares", "Eventos", "Blog"].map((item) => (
-            <button key={item} onClick={() => { setCurrentPage(item.toLowerCase()); setMenuOpen(false); }} className="px-6 py-4 text-left text-lg">{item}</button>
-          ))}
-        </nav>
-      </div>
-
-      {/* Overlay */}
+      {/* Mobile Menu - CORREÇÃO DO POSICIONAMENTO */}
       {menuOpen && (
-        <div onClick={() => setMenuOpen(false)} className="fixed top-0 left-0 h-full w-full bg-black/50 z-30" />
+        <>
+          {/* Overlay primeiro */}
+          <div 
+            className="fixed inset-0 bg-black/50 z-40 md:hidden"
+            onClick={() => setMenuOpen(false)}
+          />
+          
+          {/* Menu em si */}
+          <div className="fixed top-0 right-0 h-full w-64 bg-white shadow-xl z-50 md:hidden">
+            <div className="flex flex-col h-full pt-20"> {/* pt-20 para dar espaço do header */}
+              {["Home", "Viagens", "Lugares", "Eventos", "Blog"].map((item) => (
+                <button 
+                  key={item} 
+                  onClick={() => { 
+                    setCurrentPage(item.toLowerCase()); 
+                    setMenuOpen(false); 
+                  }} 
+                  className="px-6 py-4 text-left text-lg border-b border-gray-100 hover:bg-gray-50"
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
+          </div>
+        </>
       )}
     </header>
   );
@@ -377,4 +398,3 @@ function Footer({ setCurrentPage }: { setCurrentPage: (page: string) => void }) 
     </footer>
   );
 }
-
