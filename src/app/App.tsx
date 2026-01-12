@@ -332,7 +332,7 @@ export default function App() {
           </a>
 
           <a href="#" className="bg-black text-white px-6 py-3 rounded-2xl flex items-center gap-3 hover:bg-gray-900 transition-colors shadow-lg hover:scale-105 transform">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" className="w-6 h-6" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" className="w-15 h-15" />
             <div className="flex flex-col text-left">
               <span className="text-xs">Disponível no</span>
               <span className="font-semibold">Google Play</span>
