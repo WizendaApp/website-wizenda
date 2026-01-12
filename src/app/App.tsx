@@ -218,6 +218,40 @@ export default function App() {
           </div>
         </div>
       </section>
+{/* Sobre a Empresa */}
+<section className="py-16 bg-gray-50">
+  <div className="max-w-7xl mx-auto px-4">
+    <div className="flex flex-col md:flex-row items-center gap-12">
+      
+      {/* Texto */}
+      <div className="flex-1 text-center md:text-left">
+        <h2 className="text-4xl font-bold text-gray-800 mb-4">Sobre a Nossa Empresa</h2>
+        <p className="text-gray-600 mb-6">
+          A Wizenda é uma plataforma inovadora dedicada a conectar pessoas a experiências incríveis em Angola. Nosso objetivo é tornar cada viagem inesquecível, oferecendo guias completos, dicas locais e ferramentas digitais para explorar o país de forma prática e segura.
+        </p>
+        <p className="text-gray-600 mb-6">
+          Com uma equipe apaixonada por tecnologia e turismo, combinamos inovação, design e conhecimento local para criar experiências únicas para nossos usuários. Desde viagens culturais a aventuras radicais, a Wizenda garante que cada momento seja especial.
+        </p>
+        <button className="bg-orange-500 text-white px-6 py-3 rounded-2xl hover:bg-orange-600 transition-colors shadow-lg">
+          Saiba Mais
+        </button>
+      </div>
+
+      {/* Imagem */}
+<div className="flex-1 flex justify-center md:justify-end">
+  <img 
+    src="https://i.ibb.co/FbQQGFXD/woman-traveling-with-suitcase.png" 
+    alt="Sobre a Empresa" 
+    className="w-full h-auto md:h-[500px] object-cover rounded-2xl"
+  />
+</div>
+
+
+    </div>
+  </div>
+</section>
+
+
        {/* Nossa História Começa Aqui */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4">
@@ -309,13 +343,13 @@ export default function App() {
     </div>
   </div>
 </section>
-        {/* Mobile App Section */}
+       {/* Mobile App Section */}
 <section className="py-16 bg-gray-50">
   <div className="max-w-7xl mx-auto px-4">
     <div className="flex flex-col-reverse md:flex-row items-center gap-12">
       
       {/* Texto, botões e QR */}
-      <div className="flex flex-col items-center md:items-start text-center md:text-left gap-6">
+      <div className="flex flex-col items-center md:items-start text-center md:text-left gap-6 flex-1">
         <h2 className="text-4xl font-bold">Leve Angola no Seu Bolso</h2>
         <p className="text-gray-600">
           Baixe nosso aplicativo e tenha acesso a guias, mapas offline e ofertas exclusivas onde quer que esteja.
@@ -332,7 +366,7 @@ export default function App() {
           </a>
 
           <a href="#" className="bg-black text-white px-6 py-3 rounded-2xl flex items-center gap-3 hover:bg-gray-900 transition-colors shadow-lg hover:scale-105 transform">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" className="w-15 h-15" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" className="w-10 h-10" />
             <div className="flex flex-col text-left">
               <span className="text-xs">Disponível no</span>
               <span className="font-semibold">Google Play</span>
@@ -348,21 +382,43 @@ export default function App() {
           </span>
         </div>
       </div>
+{/* Imagem do app */}
+<div className="flex-1 flex justify-center md:justify-center lg:justify-end mt-8 md:mt-0 lg:mr-8">
+  <div className="w-48 sm:w-56 md:w-64 lg:w-72 xl:w-72 min-h-[480px] md:min-h-[600px] lg:min-h-[640px] bg-gray-200 rounded-3xl shadow-2xl overflow-hidden flex items-center justify-center">
+    <img
+      src="https://i.ibb.co/39wBjfBx/Rectangle-41.png"
+      alt="App Preview"
+      className="w-full h-full object-cover"
+    />
+  </div>
+</div>
 
-      {/* Imagem do app */}
-      <div className="flex justify-center mb-8 md:mb-0">
-        <div className="w-64 h-[550px] bg-gray-200 rounded-3xl shadow-2xl flex items-center justify-center relative overflow-hidden">
-          <ImageWithFallback 
-            src="https://i.ibb.co/39wBjfBx/Rectangle-41.png"
-            alt="App Preview"
-            className="w-full h-full object-cover"
-          />
-        </div>
-      </div>
+
+
+
 
     </div>
   </div>
 </section>
+        {/* Newsletter */}
+      <section className="py-16 bg-gradient-to-r from-orange-500 to-orange-600 text-white">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <h2 className="text-4xl font-bold mb-4">Receba Ofertas Exclusivas</h2>
+          <p className="text-lg mb-8">Inscreva-se na nossa newsletter e fique por dentro das melhores ofertas</p>
+          <div className="flex gap-4 max-w-2xl mx-auto">
+            <input 
+              type="email" 
+              placeholder="Seu melhor e-mail"
+              className="flex-1 px-6 py-4 rounded-full text-gray-800 outline-none"
+            />
+            <button className="bg-white text-orange-500 px-8 py-4 rounded-full font-bold hover:bg-gray-100">
+              Inscrever
+            </button>
+          </div>
+        </div>
+      </section>
+      
+
 
 
 
@@ -409,7 +465,10 @@ function Header({ currentPage, setCurrentPage, menuOpen, setMenuOpen }: { curren
       <div onClick={() => setMenuOpen(false)} className={clsx("fixed top-0 left-0 h-full w-full bg-black/50 backdrop-blur-sm transition-opacity duration-300", menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none")} />
     </header>
   );
+  
 }
+
+  
 
 // Footer (igual ao seu original)
 function Footer({ setCurrentPage }: { setCurrentPage: (page: string) => void }) {
@@ -462,3 +521,4 @@ function Footer({ setCurrentPage }: { setCurrentPage: (page: string) => void }) 
     </footer>
   );
 }
+
