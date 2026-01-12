@@ -227,7 +227,7 @@ export default function App() {
               { title: "Tusevo Manuel João", price: "Fundador & CEO — Desenvolvedor e Designer UI/UX", image: "https://i.ibb.co/jPv8Pgg4/Whats-App-Image-2026-01-12-at-11-04-47.jpg" },
               { title: "Dumildes Paulo", price: "Co-fundador & Desenvolvedor Backend", image: "" },
               { title: "Alexandre Landa", price: "Full Stack Developer (Flutter)", image: "" },
-              { title: "Augusto Baptista", price: "Front-end Developer", image: "https://i.ibb.co/xtzxpGC6/Whats-App-Image-2026-01-12-at-14-58-03.jpg" }
+              { title: "Augusto Baptista", price: "Web Developer", image: "https://i.ibb.co/xtzxpGC6/Whats-App-Image-2026-01-12-at-14-58-03.jpg" }
             ].map((exp, index) => (
               <div key={index} className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow">
                 <div className="relative h-60">
