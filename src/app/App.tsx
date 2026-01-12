@@ -1,103 +1,139 @@
-import { Search, Menu, Star, MapPin, Phone, Mail, Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
-import { ImageWithFallback } from './components/figma/ImageWithFallback';
-import { Carousel } from './components/Carousel';
-import { Viagens } from './components/Viagens';
-import { Lugares } from './components/Lugares';
-import { Eventos } from './components/Eventos';
-import { FaMoneyBillWave, FaBook, FaCalendarAlt, FaUsers } from 'react-icons/fa';
-import { Blog } from './components/Blog';
-import { useState } from 'react';
+import { useState } from "react";
+import { Search, Menu, Star, MapPin, Phone, Mail, Facebook, Instagram, Linkedin } from "lucide-react";
+import { ImageWithFallback } from "./components/figma/ImageWithFallback";
+import { Carousel } from "./components/Carousel";
+import { Viagens } from "./components/Viagens";
+import { Lugares } from "./components/Lugares";
+import { Eventos } from "./components/Eventos";
+import { Blog } from "./components/Blog";
+import clsx from "clsx";
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState('home');
+  const [currentPage, setCurrentPage] = useState("home");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const carouselImages = [
-    {
-      url: "https://i.ibb.co/dwprFRcg/Rectangle-33.png",
-      alt: "Deserto",
-      label: "Família"
-    },
-    {
-      url: "https://i.ibb.co/ccT1xJyT/Rectangle-34.png",
-      alt: "Cultura",
-      label: "Cultura"
-    },
-    {
-      url: "https://i.ibb.co/yBb6cm8D/Imagem-Whats-App-2025-12-05-s-12-41-00-52eb540f.jpg",
-      alt: "Aventura",
-      label: "Aventura"
-    }
+    { url: "https://i.ibb.co/dwprFRcg/Rectangle-33.png", alt: "Deserto", label: "Família" },
+    { url: "https://i.ibb.co/ccT1xJyT/Rectangle-34.png", alt: "Cultura", label: "Cultura" },
+    { url: "https://i.ibb.co/yBb6cm8D/Imagem-Whats-App-2025-12-05-s-12-41-00-52eb540f.jpg", alt: "Aventura", label: "Aventura" },
   ];
 
-  // Render different pages based on currentPage state
-  if (currentPage === 'viagens') return <><Header setCurrentPage={setCurrentPage} currentPage={currentPage} /><Viagens /><Footer setCurrentPage={setCurrentPage} /></>;
-  if (currentPage === 'lugares') return <><Header setCurrentPage={setCurrentPage} currentPage={currentPage} /><Lugares /><Footer setCurrentPage={setCurrentPage} /></>;
-  if (currentPage === 'eventos') return <><Header setCurrentPage={setCurrentPage} currentPage={currentPage} /><Eventos /><Footer setCurrentPage={setCurrentPage} /></>;
-  if (currentPage === 'blog') return <><Header setCurrentPage={setCurrentPage} currentPage={currentPage} /><Blog /><Footer setCurrentPage={setCurrentPage} /></>;
+  // Render pages
+  if (currentPage === "viagens") return <><Header currentPage={currentPage} setCurrentPage={setCurrentPage} menuOpen={menuOpen} setMenuOpen={setMenuOpen} /><Viagens /><Footer setCurrentPage={setCurrentPage} /></>;
+  if (currentPage === "lugares") return <><Header currentPage={currentPage} setCurrentPage={setCurrentPage} menuOpen={menuOpen} setMenuOpen={setMenuOpen} /><Lugares /><Footer setCurrentPage={setCurrentPage} /></>;
+  if (currentPage === "eventos") return <><Header currentPage={currentPage} setCurrentPage={setCurrentPage} menuOpen={menuOpen} setMenuOpen={setMenuOpen} /><Eventos /><Footer setCurrentPage={setCurrentPage} /></>;
+  if (currentPage === "blog") return <><Header currentPage={currentPage} setCurrentPage={setCurrentPage} menuOpen={menuOpen} setMenuOpen={setMenuOpen} /><Blog /><Footer setCurrentPage={setCurrentPage} /></>;
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header */}
-      <Header setCurrentPage={setCurrentPage} currentPage={currentPage} />
+    <div className="relative min-h-screen">
+      <Header currentPage={currentPage} setCurrentPage={setCurrentPage} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
 
       {/* Hero Section */}
-      <section className="relative h-[500px] bg-cover bg-center" style={{
-        backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://i.ibb.co/Z1NXpbSX/Rectangle-4.png')`
-      }}>
+      <section className="relative h-[500px] bg-cover bg-center" style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://i.ibb.co/Z1NXpbSX/Rectangle-4.png')` }}>
         <div className="max-w-7xl mx-auto px-4 h-full flex flex-col justify-center items-center text-center">
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
-            Explorar Angola nunca<br />foi tão fácil
-          </h1>
-          <p className="text-xl text-white mb-8">
-            Descubra experiências incríveis em cada canto do país
-          </p>
+          <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">Explorar Angola nunca<br />foi tão fácil</h1>
+          <p className="text-xl text-white mb-8">Descubra experiências incríveis em cada canto do país</p>
           <div className="flex gap-4">
-            <button className="bg-orange-500 text-white px-8 py-3 rounded-[5px] hover:bg-orange-600 font-medium">
-              Começar 
-            </button>
-           <button className="px-8 py-3 rounded-[5px] border border-white bg-white/10 backdrop-blur-sm text-white font-medium hover:bg-white/20 transition-colors">
-  Baixar o App
-</button>
+            <button className="bg-orange-500 text-white px-8 py-3 rounded-[5px] hover:bg-orange-600 font-medium">Começar</button>
+            <button className="px-8 py-3 rounded-[5px] border border-white bg-white/10 backdrop-blur-sm text-white font-medium hover:bg-white/20 transition-colors">Baixar o App</button>
           </div>
         </div>
       </section>
 
-      {/* Para cada momento section */}
+      {/* Para cada momento */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-2">
-            Para cada momento, um Wizenda<br />diferente
-          </h2>
+          <h2 className="text-3xl font-bold text-center mb-2">Para cada momento, um Wizenda diferente</h2>
           <p className="text-center text-gray-500 mb-12">Quero a melhor experiência para Tour</p>
           <Carousel images={carouselImages} />
         </div>
       </section>
+{/* Seção de Parceiros Normalizada */}
+<section className="py-16 bg-white">
+  <div className="max-w-7xl mx-auto px-4">
+    <h2 className="text-3xl font-bold text-center mb-12">
+      Nossos Parceiros
+    </h2>
 
-      {/* Negócios e sociedade */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-4">Negócios e sociedade</h2>
-          <p className="text-center text-gray-600 mb-12">
-            Conecte-se com oportunidades e eventos em Angola
-          </p>
-          <div className="grid md:grid-cols-4 gap-6">
-            {[
-              { title: "Investir em Angola", desc: "Oportunidades de negócio"  },
-              { title: "Guia de Negócios", desc: "Informações essenciais" },
-              { title: "Eventos", desc: "Calendário completo" },
-              { title: "Networking", desc: "Conecte-se com profissionais" }
-            ].map((item, index) => (
-              <div key={index} className="bg-gray-50 p-6 rounded-lg hover:shadow-lg transition-shadow">
-                <div className="w-12 h-12 bg-orange-500 rounded-lg mb-4"></div>
-                <h3 className="font-bold mb-2">{item.title}</h3>
-                <p className="text-sm text-gray-600">{item.desc}</p>
-              </div>
-            ))}
-          </div>
+    <div
+      className="grid justify-center gap-6"
+      style={{
+        gridTemplateColumns: "repeat(auto-fit, minmax(120px, max-content))"
+      }}
+    >
+      {[
+        
+        "https://i.ibb.co/05R3Jqx/domestic.png",
+        "https://i.ibb.co/jZfB2y48/ruby.png",
+        
+      ].map((logo, index) => (
+        <div
+          key={index}
+          className="flex items-center justify-center h-14 px-3"
+        >
+          <img
+            src={logo}
+            alt={`Parceiro ${index + 1}`}
+            className="
+              h-15
+              w-auto
+              object-contain
+              grayscale
+              opacity-40
+              hover:opacity-80
+              transition
+            "
+          />
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
 
-      {/* Acomodações em Ondjiva */}
+
+
+
+
+
+{/* Negócios e sociedade */}
+<section className="py-16">
+  <div className="max-w-7xl mx-auto px-4">
+    <h2 className="text-3xl font-bold text-center mb-4">
+      Negócios e sociedade
+    </h2>
+    <p className="text-center text-gray-600 mb-12">
+      Conecte-se com oportunidades e eventos em Angola
+    </p>
+
+    <div className="grid md:grid-cols-4 gap-6">
+      {[
+        { title: "Investir em Angola", desc: "Oportunidades de negócio" },
+        { title: "Guia de Negócios", desc: "Informações essenciais" },
+        { title: "Eventos", desc: "Calendário completo" },
+        { title: "Networking", desc: "Conecte-se com profissionais" }
+      ].map((item, index) => (
+        <div
+          key={index}
+          className="bg-gray-50 p-6 rounded-lg hover:shadow-lg transition-shadow"
+        >
+          {/* Número */}
+          <div className="w-12 h-12 bg-orange-500 rounded-lg mb-4 flex items-center justify-center">
+            <span className="text-white font-bold text-lg">
+              {index + 1}
+            </span>
+          </div>
+
+          <h3 className="font-bold mb-2">{item.title}</h3>
+          <p className="text-sm text-gray-600">{item.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+
+      
+       {/* Acomodações em Ondjiva */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-between items-center mb-8">
@@ -148,8 +184,8 @@ export default function App() {
           </div>
         </div>
       </section>
-
-      {/* Experiências Populares */}
+      
+        {/* Experiências Populares */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">Experiências Populares</h2>
@@ -191,7 +227,7 @@ export default function App() {
               { title: "Tusevo Manuel João", price: "Fundador & CEO — Desenvolvedor e Designer UI/UX", image: "https://i.ibb.co/jPv8Pgg4/Whats-App-Image-2026-01-12-at-11-04-47.jpg" },
               { title: "Dumildes Paulo", price: "Co-fundador & Desenvolvedor Backend", image: "" },
               { title: "Alexandre Landa", price: "Full Stack Developer (Flutter)", image: "" },
-              { title: "Augusto Baptista", price: "Front-end Developer", image: "" }
+              { title: "Augusto Baptista", price: "Front-end Developer", image: "https://i.ibb.co/xtzxpGC6/Whats-App-Image-2026-01-12-at-14-58-03.jpg" }
             ].map((exp, index) => (
               <div key={index} className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow">
                 <div className="relative h-60">
@@ -212,7 +248,6 @@ export default function App() {
           </div>
         </div>
       </section>
-
       {/* Statistics */}
       <section className="py-16 bg-[#1E3A5F] text-white">
         <div className="max-w-7xl mx-auto px-4">
@@ -236,143 +271,168 @@ export default function App() {
           </div>
         </div>
       </section>
-
       {/* Depoimentos */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">O que dizem Nossos Viajantes</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              { name: "Maria Silva", location: "Lisboa", text: "Uma experiência incrível! Angola surpreendeu em cada momento." },
-              { name: "João Santos", location: "Luanda", text: "O melhor guia para explorar Angola. Recomendo muito!" },
-              { name: "Ana Costa", location: "Porto", text: "Descobri lugares incríveis que nunca imaginei existir." }
-            ].map((testimonial, index) => (
-              <div key={index} className="bg-gray-50 p-6 rounded-lg">
-                <div className="flex gap-1 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-orange-500 text-orange-500" />
-                  ))}
-                </div>
-                <p className="text-gray-700 mb-4">"{testimonial.text}"</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-orange-200 rounded-full"></div>
-                  <div>
-                    <div className="font-bold">{testimonial.name}</div>
-                    <div className="text-sm text-gray-600">{testimonial.location}</div>
-                  </div>
-                </div>
-              </div>
+<section className="py-16 bg-gray-50">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12">O que dizem Nossos Viajantes</h2>
+    
+    <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-8">
+      {[
+        { name: "Maria Silva", location: "Lisboa", text: "Uma experiência incrível! Angola surpreendeu em cada momento.", img: "https://randomuser.me/api/portraits/women/65.jpg" },
+        { name: "João Santos", location: "Luanda", text: "O melhor guia para explorar Angola. Recomendo muito!", img: "https://randomuser.me/api/portraits/men/54.jpg" },
+        { name: "Ana Costa", location: "Porto", text: "Descobri lugares incríveis que nunca imaginei existir.", img: "https://randomuser.me/api/portraits/women/68.jpg" }
+      ].map((testimonial, index) => (
+        <div key={index} className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 relative flex flex-col">
+          {/* Barra decorativa */}
+          <div className="absolute top-0 left-6 right-6 h-1 rounded-t-xl bg-gradient-to-r from-orange-400 to-orange-600"></div>
+          
+          {/* Avaliação em estrelas */}
+          <div className="flex gap-1 mb-4 mt-2">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} className="w-5 h-5 fill-orange-500 text-orange-500" />
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* Mobile App Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          {/* Texto do depoimento */}
+          <p className="text-gray-700 mb-6 text-sm sm:text-base">"{testimonial.text}"</p>
+
+          {/* Avatar e info */}
+          <div className="flex items-center gap-3 mt-auto">
+            <img src={testimonial.img} alt={testimonial.name} className="w-12 h-12 rounded-full object-cover border-2 border-orange-500" />
             <div>
-              <h2 className="text-4xl font-bold mb-4">Leve Angola no Seu Bolso</h2>
-              <p className="text-gray-600 mb-6">
-                Baixe nosso aplicativo e tenha acesso a guias, mapas offline e ofertas exclusivas onde quer que esteja.
-              </p>
-              <div className="flex gap-4 mb-8">
-                <button className="bg-black text-white px-6 py-3 rounded-lg flex items-center gap-2">
-                  <span>App Store</span>
-                </button>
-                <button className="bg-black text-white px-6 py-3 rounded-lg flex items-center gap-2">
-                  <span>Google Play</span>
-                </button>
-              </div>
-            </div>
-            <div className="flex justify-center">
-              <div className="w-64 h-[550px] bg-gray-200 rounded-3xl shadow-2xl flex items-center justify-center relative overflow-hidden">
-                <ImageWithFallback 
-                  src="https://i.ibb.co/39wBjfBx/Rectangle-41.png"
-                  alt="App Preview"
-                  className="w-full h-full object-cover"
-                />
-              </div>
+              <div className="font-semibold text-gray-800">{testimonial.name}</div>
+              <div className="text-sm text-gray-500">{testimonial.location}</div>
             </div>
           </div>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
+        {/* Mobile App Section */}
+<section className="py-16 bg-gray-50">
+  <div className="max-w-7xl mx-auto px-4">
+    <div className="flex flex-col-reverse md:flex-row items-center gap-12">
+      
+      {/* Texto, botões e QR */}
+      <div className="flex flex-col items-center md:items-start text-center md:text-left gap-6">
+        <h2 className="text-4xl font-bold">Leve Angola no Seu Bolso</h2>
+        <p className="text-gray-600">
+          Baixe nosso aplicativo e tenha acesso a guias, mapas offline e ofertas exclusivas onde quer que esteja.
+        </p>
 
-      {/* Newsletter */}
-      <section className="py-16 bg-gradient-to-r from-orange-500 to-orange-600 text-white">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-4">Receba Ofertas Exclusivas</h2>
-          <p className="text-lg mb-8">Inscreva-se na nossa newsletter e fique por dentro das melhores ofertas</p>
-          <div className="flex gap-4 max-w-2xl mx-auto">
-            <input 
-              type="email" 
-              placeholder="Seu melhor e-mail"
-              className="flex-1 px-6 py-4 rounded-full text-gray-800 outline-none"
-            />
-            <button className="bg-white text-orange-500 px-8 py-4 rounded-full font-bold hover:bg-gray-100">
-              Inscrever
-            </button>
-          </div>
+        {/* Botões App Store / Google Play */}
+        <div className="flex flex-col sm:flex-row gap-4 w-full justify-center md:justify-start">
+          <a href="#" className="bg-black text-white px-6 py-3 rounded-2xl flex items-center gap-3 hover:bg-gray-900 transition-colors shadow-lg hover:scale-105 transform">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/67/App_Store_%28iOS%29.svg" alt="App Store" className="w-6 h-6" />
+            <div className="flex flex-col text-left">
+              <span className="text-xs">Baixe na</span>
+              <span className="font-semibold">App Store</span>
+            </div>
+          </a>
+
+          <a href="#" className="bg-black text-white px-6 py-3 rounded-2xl flex items-center gap-3 hover:bg-gray-900 transition-colors shadow-lg hover:scale-105 transform">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" className="w-6 h-6" />
+            <div className="flex flex-col text-left">
+              <span className="text-xs">Disponível no</span>
+              <span className="font-semibold">Google Play</span>
+            </div>
+          </a>
         </div>
-      </section>
 
-      {/* Footer */}
+        {/* Card do QR code */}
+        <div className="bg-white p-6 rounded-3xl shadow-xl flex flex-col items-center gap-4 mt-6">
+          <img src="https://i.ibb.co/2y0t8r7/qr-code.png" alt="QR Code App" className="w-32 h-32 object-cover" />
+          <span className="text-gray-600 text-center text-sm">
+            Escaneie o QR code e baixe o app agora!
+          </span>
+        </div>
+      </div>
+
+      {/* Imagem do app */}
+      <div className="flex justify-center mb-8 md:mb-0">
+        <div className="w-64 h-[550px] bg-gray-200 rounded-3xl shadow-2xl flex items-center justify-center relative overflow-hidden">
+          <ImageWithFallback 
+            src="https://i.ibb.co/39wBjfBx/Rectangle-41.png"
+            alt="App Preview"
+            className="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+      {/* Restante conteúdo: Negócios, Hotéis, Experiências, História, Estatísticas, Depoimentos, App, Newsletter, Footer */}
+      {/* Você pode colar aqui as seções que já tinha do seu código original */}
+
       <Footer setCurrentPage={setCurrentPage} />
     </div>
   );
 }
 
-function Header({ setCurrentPage, currentPage }: { setCurrentPage: (page: string) => void, currentPage: string }) {
+// Header com menu hamburguer animado
+function Header({ currentPage, setCurrentPage, menuOpen, setMenuOpen }: { currentPage: string, setCurrentPage: (page: string) => void, menuOpen: boolean, setMenuOpen: (state: boolean) => void }) {
   return (
-    <header className="bg-white shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-8">
-          <button onClick={() => setCurrentPage('home')} className="text-2xl font-bold text-orange-500">Wizenda</button>
-          <nav className="hidden md:flex gap-6">
-            <button onClick={() => setCurrentPage('viagens')} className={`${currentPage === 'viagens' ? 'text-orange-500' : 'text-gray-700'} hover:text-orange-500`}>Viagens</button>
-            <button onClick={() => setCurrentPage('lugares')} className={`${currentPage === 'lugares' ? 'text-orange-500' : 'text-gray-700'} hover:text-orange-500`}>Lugares</button>
-            <button onClick={() => setCurrentPage('eventos')} className={`${currentPage === 'eventos' ? 'text-orange-500' : 'text-gray-700'} hover:text-orange-500`}>Eventos</button>
-            <button onClick={() => setCurrentPage('blog')} className={`${currentPage === 'blog' ? 'text-orange-500' : 'text-gray-700'} hover:text-orange-500`}>Blog</button>
-          </nav>
-        </div>
-        <div className="flex items-center gap-4">
-          <div className="hidden md:flex items-center gap-2 border rounded-full px-4 py-2">
-            <Search className="w-4 h-4 text-gray-400" />
-            <input type="text" placeholder="Buscar..." className="outline-none text-sm" />
-          </div>
-          <button className="bg-orange-500 text-white px-6 py-2 rounded-[5px] hover:bg-orange-600">
-            Entrar
-          </button>
-          <button className="md:hidden">
-            <Menu className="w-6 h-6" />
-          </button>
-        </div>
+    <header className="bg-white shadow-md fixed top-0 left-0 w-full z-50">
+      <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        <div className="text-2xl font-bold text-orange-500">Wizenda</div>
+
+        {/* Desktop Menu */}
+        <nav className="hidden md:flex gap-6">
+          {["Home", "Viagens", "Lugares", "Eventos", "Blog"].map((item) => (
+            <button key={item} onClick={() => setCurrentPage(item.toLowerCase())} className={clsx("hover:text-orange-500 transition-colors font-medium", currentPage === item.toLowerCase() && "text-orange-500")}>{item}</button>
+          ))}
+        </nav>
+
+        {/* Hamburger */}
+        <button className="md:hidden flex flex-col gap-1 w-6 h-6 justify-center items-center relative z-50" onClick={() => setMenuOpen(!menuOpen)}>
+          <span className={clsx("block h-0.5 w-full bg-black transition-transform duration-300", menuOpen ? "rotate-45 translate-y-2" : "")} />
+          <span className={clsx("block h-0.5 w-full bg-black transition-opacity duration-300", menuOpen ? "opacity-0" : "")} />
+          <span className={clsx("block h-0.5 w-full bg-black transition-transform duration-300", menuOpen ? "-rotate-45 -translate-y-2" : "")} />
+        </button>
       </div>
+
+      {/* Mobile Menu */}
+      <div className={clsx("fixed top-0 right-0 h-full w-64 bg-white shadow-xl transition-transform duration-300 z-40", menuOpen ? "translate-x-0" : "translate-x-full")}>
+        <nav className="flex flex-col mt-20">
+          {["Home", "Viagens", "Lugares", "Eventos", "Blog"].map((item) => (
+            <button key={item} onClick={() => { setCurrentPage(item.toLowerCase()); setMenuOpen(false); }} className="px-6 py-4 text-left text-lg hover:bg-gray-100 transition-colors">{item}</button>
+          ))}
+        </nav>
+      </div>
+
+      {/* Overlay */}
+      <div onClick={() => setMenuOpen(false)} className={clsx("fixed top-0 left-0 h-full w-full bg-black/50 backdrop-blur-sm transition-opacity duration-300", menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none")} />
     </header>
   );
 }
 
+// Footer (igual ao seu original)
 function Footer({ setCurrentPage }: { setCurrentPage: (page: string) => void }) {
   return (
-    <footer className="bg-[#1E3A5F] text-white py-12">
+    <footer className="bg-[#1E3A5F] text-white py-12 mt-16">
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           <div>
             <h3 className="text-xl font-bold mb-4">Wizenda</h3>
-            <p className="text-gray-400 text-sm">
-              Sua plataforma completa para explorar Angola
-            </p>
+            <p className="text-gray-400 text-sm">Sua plataforma completa para explorar Angola</p>
           </div>
+          
           <div>
             <h4 className="font-bold mb-4">Links Rápidos</h4>
             <ul className="space-y-2 text-gray-400 text-sm">
-              <li><button onClick={() => setCurrentPage('home')} className="hover:text-white">Sobre Nós</button></li>
-              <li><button onClick={() => setCurrentPage('lugares')} className="hover:text-white">Destinos</button></li>
-              <li><button onClick={() => setCurrentPage('blog')} className="hover:text-white">Blog</button></li>
+              <li><button onClick={() => setCurrentPage("home")} className="hover:text-white">Sobre Nós</button></li>
+              <li><button onClick={() => setCurrentPage("lugares")} className="hover:text-white">Destinos</button></li>
+              <li><button onClick={() => setCurrentPage("blog")} className="hover:text-white">Blog</button></li>
               <li><a href="#" className="hover:text-white">Contato</a></li>
             </ul>
           </div>
           <div>
+            
             <h4 className="font-bold mb-4">Suporte</h4>
             <ul className="space-y-2 text-gray-400 text-sm">
               <li><a href="#" className="hover:text-white">Central de Ajuda</a></li>
@@ -384,34 +444,22 @@ function Footer({ setCurrentPage }: { setCurrentPage: (page: string) => void }) 
           <div>
             <h4 className="font-bold mb-4">Contato</h4>
             <ul className="space-y-2 text-gray-400 text-sm">
-              <li className="flex items-center gap-2">
-                <Phone className="w-4 h-4" />
-                <span>+244 957 184 813</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <Mail className="w-4 h-4" />
-                <span>wizenda0@gmail.com</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <MapPin className="w-4 h-4" />
-                <span>Luanda, Angola</span>
-              </li>
+              <li className="flex items-center gap-2"><Phone className="w-4 h-4" /><span>+244 957 184 813</span></li>
+              <li className="flex items-center gap-2"><Mail className="w-4 h-4" /><span>wizenda0@gmail.com</span></li>
+              <li className="flex items-center gap-2"><MapPin className="w-4 h-4" /><span>Luanda, Angola</span></li>
             </ul>
           </div>
         </div>
-        <div className="border-t border-gray-700 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="text-sm text-gray-400">
-              © 2026 Wizenda Angola. Todos os direitos reservados.
-            </div>
-            <div className="flex gap-4">
-              <a href="#" className="hover:text-orange-500"><Facebook className="w-5 h-5" /></a>
-              <a href="#" className="hover:text-orange-500"><Instagram className="w-5 h-5" /></a>
-              <a href="#" className="hover:text-orange-500"><Linkedin className="w-5 h-5" /></a>
-            </div>
+        <div className="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
+          <span>© 2026 Wizenda Angola. Todos os direitos reservados.</span>
+          <div className="flex gap-4">
+            <a href="#" className="hover:text-orange-500"><Facebook className="w-5 h-5" /></a>
+            <a href="#" className="hover:text-orange-500"><Instagram className="w-5 h-5" /></a>
+            <a href="#" className="hover:text-orange-500"><Linkedin className="w-5 h-5" /></a>
           </div>
         </div>
       </div>
     </footer>
   );
 }
+
