@@ -182,6 +182,36 @@ export default function App() {
           </div>
         </div>
       </section>
+       {/* Nossa História Começa Aqui */}
+      <section className="py-16">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12">Nossa História Começa Aqui</h2>
+          <div className="grid md:grid-cols-4 gap-6">
+            {[
+              { title: "Tusevo Manuel João", price: "Fundador & CEO — Desenvolvedor e Designer UI/UX", image: "https://i.ibb.co/jPv8Pgg4/Whats-App-Image-2026-01-12-at-11-04-47.jpg" },
+              { title: "Dumildes Paulo", price: "Co-fundador & Desenvolvedor Backend", image: "" },
+              { title: "Alexandre Landa", price: "Full Stack Developer (Flutter)", image: "" },
+              { title: "Augusto Baptista", price: "Front-end Developer", image: "" }
+            ].map((exp, index) => (
+              <div key={index} className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow">
+                <div className="relative h-60">
+                  <ImageWithFallback 
+                    src={exp.image}
+                    alt={exp.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="font-bold mb-2">{exp.title}</h3>
+                  <div className="flex justify-between items-center">
+                    <span className="text-orange-500 font-bold">{exp.price}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Statistics */}
       <section className="py-16 bg-[#1E3A5F] text-white">
@@ -310,7 +340,7 @@ function Header({ setCurrentPage, currentPage }: { setCurrentPage: (page: string
             <Search className="w-4 h-4 text-gray-400" />
             <input type="text" placeholder="Buscar..." className="outline-none text-sm" />
           </div>
-          <button className="bg-orange-500 text-white px-6 py-2 rounded-[5px]  hover:bg-orange-600">
+          <button className="bg-orange-500 text-white px-6 py-2 rounded-[5px] hover:bg-orange-600">
             Entrar
           </button>
           <button className="md:hidden">
