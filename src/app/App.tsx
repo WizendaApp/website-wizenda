@@ -6,11 +6,13 @@ import { Viagens } from "./components/Viagens";
 import { Lugares } from "./components/Lugares";
 import { Eventos } from "./components/Eventos";
 import { Blog } from "./components/Blog";
+import { Modal } from "./components/Modal";
 import clsx from "clsx";
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const carouselImages = [
     { url: "https://i.ibb.co/dwprFRcg/Rectangle-33.png", alt: "Deserto", label: "Família" },
@@ -28,14 +30,41 @@ export default function App() {
     <div className="relative min-h-screen">
       <Header currentPage={currentPage} setCurrentPage={setCurrentPage} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
 
+      {/* Modal de App Indisponível */}
+      <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} title="App em Desenvolvimento">
+        <div className="space-y-4">
+          <p className="text-gray-700">
+            Nosso aplicativo mobile ainda está em desenvolvimento e não está disponível para download no momento.
+          </p>
+          <p className="text-gray-700">
+            Estamos trabalhando para trazer a melhor experiência para você! Em breve, você poderá explorar Angola diretamente do seu dispositivo móvel.
+          </p>
+          <div className="pt-4 flex justify-end">
+            <button 
+              onClick={() => setModalOpen(false)}
+              className="bg-orange-500 text-white px-6 py-2 rounded-full hover:bg-orange-600 transition-colors"
+            >
+              Entendi
+            </button>
+          </div>
+        </div>
+      </Modal>
+
       {/* Hero Section */}
-      <section className="relative h-[500px] bg-cover bg-center" style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://i.ibb.co/Z1NXpbSX/Rectangle-4.png')` }}>
+      <section className="relative h-[500px] md:h-[600px] bg-cover bg-center mt-16" style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://i.ibb.co/Z1NXpbSX/Rectangle-4.png')` }}>
         <div className="max-w-7xl mx-auto px-4 h-full flex flex-col justify-center items-center text-center">
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">Explorar Angola nunca<br />foi tão fácil</h1>
-          <p className="text-xl text-white mb-8">Descubra experiências incríveis em cada canto do país</p>
-          <div className="flex gap-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 px-4">
+            Explorar Angola nunca<br />foi tão fácil
+          </h1>
+          <p className="text-base sm:text-lg md:text-xl text-white mb-8 px-4">Descubra experiências incríveis em cada canto do país</p>
+          <div className="flex flex-col sm:flex-row gap-4 px-4">
             <button className="bg-orange-500 text-white px-8 py-3 rounded-[5px] hover:bg-orange-600 font-medium">Começar</button>
-            <button className="px-8 py-3 rounded-[5px] border border-white bg-white/10 backdrop-blur-sm text-white font-medium hover:bg-white/20 transition-colors">Baixar o App</button>
+            <button 
+              onClick={() => setModalOpen(true)}
+              className="px-8 py-3 rounded-[5px] border border-white bg-white/10 backdrop-blur-sm text-white font-medium hover:bg-white/20 transition-colors"
+            >
+              Baixar o App
+            </button>
           </div>
         </div>
       </section>
@@ -98,14 +127,14 @@ export default function App() {
 {/* Negócios e sociedade */}
 <section className="py-16">
   <div className="max-w-7xl mx-auto px-4">
-    <h2 className="text-3xl font-bold text-center mb-4">
+    <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4">
       Negócios e sociedade
     </h2>
-    <p className="text-center text-gray-600 mb-12">
+    <p className="text-center text-gray-600 mb-12 text-sm sm:text-base px-4">
       Conecte-se com oportunidades e eventos em Angola
     </p>
 
-    <div className="grid md:grid-cols-4 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
       {[
         { title: "Investir em Angola", desc: "Oportunidades de negócio" },
         { title: "Guia de Negócios", desc: "Informações essenciais" },
@@ -136,13 +165,13 @@ export default function App() {
        {/* Acomodações em Ondjiva */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-3xl font-bold">Acomodações em Ondjiva</h2>
-            <button className="text-orange-500 hover:text-orange-600 font-medium">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
+            <h2 className="text-2xl sm:text-3xl font-bold">Acomodações em Ondjiva</h2>
+            <button className="text-orange-500 hover:text-orange-600 font-medium text-sm sm:text-base">
               Ver tudo →
             </button>
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {[
               { name: "HOTEL BUNGALOW MARIA", rating: 4.5, reviews: 120, price: "120.000 Kz", image: "https://images.unsplash.com/photo-1575999080555-3f7a698dd8d9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhZnJpY2FuJTIwaG90ZWwlMjBsdXh1cnl8ZW58MXx8fHwxNzY3OTg4ODM3fDA&ixlib=rb-4.1.0&q=80&w=1080" },
               { name: "HOTEL COMPLEXO LUXO", rating: 4.8, reviews: 85, price: "180.000 Kz", image: "https://images.unsplash.com/photo-1601057278541-a64df1197c19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3YXRlcmZhbGwlMjBuYXR1cmUlMjBzY2VuaWN8ZW58MXx8fHwxNzY4MDYwNzYwfDA&ixlib=rb-4.1.0&q=80&w=1080" },
@@ -188,8 +217,8 @@ export default function App() {
         {/* Experiências Populares */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Experiências Populares</h2>
-          <div className="grid md:grid-cols-4 gap-6">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-12">Experiências Populares</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {[
               { title: "Tour pelas Quedas de Kalandula", price: "45.000 Kz", image: "https://images.unsplash.com/photo-1601057278541-a64df1197c19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3YXRlcmZhbGwlMjBuYXR1cmUlMjBzY2VuaWN8ZW58MXx8fHwxNzY4MDYwNzYwfDA&ixlib=rb-4.1.0&q=80&w=1080" },
               { title: "Safari no Parque Nacional", price: "85.000 Kz", image: "https://images.unsplash.com/photo-1602410125631-7e736e36797c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzYWZhcmklMjBhZHZlbnR1cmUlMjBhZnJpY2F8ZW58MXx8fHwxNzY4MDYwNzU5fDA&ixlib=rb-4.1.0&q=80&w=1080" },
@@ -255,8 +284,8 @@ export default function App() {
        {/* Nossa História Começa Aqui */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Nossa História Começa Aqui</h2>
-          <div className="grid md:grid-cols-4 gap-6">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-12">Nossa História Começa Aqui</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             {[
               { title: "Tusevo Manuel João", price: "Fundador & CEO — Desenvolvedor e Designer UI/UX", image: "https://i.ibb.co/jPv8Pgg4/Whats-App-Image-2026-01-12-at-11-04-47.jpg" },
               { title: "Dumildes Paulo", price: "Co-fundador & Desenvolvedor Backend", image: "" },
@@ -285,22 +314,22 @@ export default function App() {
       {/* Statistics */}
       <section className="py-16 bg-[#1E3A5F] text-white">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8 text-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
-              <div className="text-5xl font-bold mb-2">93.000+</div>
-              <div className="text-gray-300">Viajantes satisfeitos</div>
+              <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2">93.000+</div>
+              <div className="text-gray-300 text-sm sm:text-base">Viajantes satisfeitos</div>
             </div>
             <div>
-              <div className="text-5xl font-bold mb-2">9000+</div>
-              <div className="text-gray-300">Acomodações</div>
+              <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2">9000+</div>
+              <div className="text-gray-300 text-sm sm:text-base">Acomodações</div>
             </div>
             <div>
-              <div className="text-5xl font-bold mb-2">800+</div>
-              <div className="text-gray-300">Experiências únicas</div>
+              <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2">800+</div>
+              <div className="text-gray-300 text-sm sm:text-base">Experiências únicas</div>
             </div>
             <div>
-              <div className="text-5xl font-bold mb-2">180.000+</div>
-              <div className="text-gray-300">Avaliações</div>
+              <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2">180.000+</div>
+              <div className="text-gray-300 text-sm sm:text-base">Avaliações</div>
             </div>
           </div>
         </div>
@@ -350,28 +379,34 @@ export default function App() {
       
       {/* Texto, botões e QR */}
       <div className="flex flex-col items-center md:items-start text-center md:text-left gap-6 flex-1">
-        <h2 className="text-4xl font-bold">Leve Angola no Seu Bolso</h2>
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Leve Angola no Seu Bolso</h2>
         <p className="text-gray-600">
           Baixe nosso aplicativo e tenha acesso a guias, mapas offline e ofertas exclusivas onde quer que esteja.
         </p>
 
         {/* Botões App Store / Google Play */}
         <div className="flex flex-col sm:flex-row gap-4 w-full justify-center md:justify-start">
-          <a href="#" className="bg-black text-white px-6 py-3 rounded-2xl flex items-center gap-3 hover:bg-gray-900 transition-colors shadow-lg hover:scale-105 transform">
+          <button 
+            onClick={() => setModalOpen(true)}
+            className="bg-black text-white px-6 py-3 rounded-2xl flex items-center justify-center gap-3 hover:bg-gray-900 transition-colors shadow-lg hover:scale-105 transform"
+          >
             <img src="https://upload.wikimedia.org/wikipedia/commons/6/67/App_Store_%28iOS%29.svg" alt="App Store" className="w-6 h-6" />
             <div className="flex flex-col text-left">
               <span className="text-xs">Baixe na</span>
               <span className="font-semibold">App Store</span>
             </div>
-          </a>
+          </button>
 
-          <a href="#" className="bg-black text-white px-6 py-3 rounded-2xl flex items-center gap-3 hover:bg-gray-900 transition-colors shadow-lg hover:scale-105 transform">
+          <button 
+            onClick={() => setModalOpen(true)}
+            className="bg-black text-white px-6 py-3 rounded-2xl flex items-center justify-center gap-3 hover:bg-gray-900 transition-colors shadow-lg hover:scale-105 transform"
+          >
             <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" className="w-10 h-10" />
             <div className="flex flex-col text-left">
               <span className="text-xs">Disponível no</span>
               <span className="font-semibold">Google Play</span>
             </div>
-          </a>
+          </button>
         </div>
 
         {/* Card do QR code */}
@@ -403,25 +438,21 @@ export default function App() {
         {/* Newsletter */}
       <section className="py-16 bg-gradient-to-r from-orange-500 to-orange-600 text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-4">Receba Ofertas Exclusivas</h2>
-          <p className="text-lg mb-8">Inscreva-se na nossa newsletter e fique por dentro das melhores ofertas</p>
-          <div className="flex gap-4 max-w-2xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Receba Ofertas Exclusivas</h2>
+          <p className="text-base sm:text-lg mb-8">Inscreva-se na nossa newsletter e fique por dentro das melhores ofertas</p>
+          <div className="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto">
             <input 
               type="email" 
               placeholder="Seu melhor e-mail"
               className="flex-1 px-6 py-4 rounded-full text-gray-800 outline-none"
             />
-            <button className="bg-white text-orange-500 px-8 py-4 rounded-full font-bold hover:bg-gray-100">
+            <button className="bg-white text-orange-500 px-8 py-4 rounded-full font-bold hover:bg-gray-100 whitespace-nowrap">
               Inscrever
             </button>
           </div>
         </div>
       </section>
       
-
-
-
-
       {/* Restante conteúdo: Negócios, Hotéis, Experiências, História, Estatísticas, Depoimentos, App, Newsletter, Footer */}
       {/* Você pode colar aqui as seções que já tinha do seu código original */}
 
@@ -521,4 +552,3 @@ function Footer({ setCurrentPage }: { setCurrentPage: (page: string) => void }) 
     </footer>
   );
 }
-

@@ -178,4 +178,16 @@
     font-weight: var(--font-weight-normal);
     line-height: 1.5;
   }
+
+  /* Modal animation */
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
